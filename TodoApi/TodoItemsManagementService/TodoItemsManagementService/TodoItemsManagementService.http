@@ -1,0 +1,11 @@
+﻿@TodoItemsManagementService_HostAddress = https://localhost:7053
+
+POST {{TodoItemsManagementService_HostAddress}}/todoitems
+Content-Type: application/json
+
+{
+  "name":"test2",
+  "isDone": false
+}
+
+###
