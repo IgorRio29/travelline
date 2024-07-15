@@ -1,6 +1,5 @@
-# travelline
-Preonboarding task
-Steps
+# Todo app
+Prerequisites:
 1. Before openning UI please start API service
 
 Upcoming updates:
