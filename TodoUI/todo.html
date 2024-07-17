@@ -1,34 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="todoApp">
 
 <head>
-    <link rel="stylesheet" href="todo.css">
+    <link rel="stylesheet" href="css/todo.css">
     <title>Todo</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="js/todoController.js"></script>
 </head>
 
 <body>
-    <div class="container" ng-app="ToDoApp" ng-controller="controller" ng-init="init()">
+    <div class="container" ng-controller="todoController as todo" ng-init="todo.init()">
         <div class="icon-panel">
             <!-- Search-->
             <div class="icon-with-editor-area">
-                <div class="icon-area" ng-click="toggleSearchBox()" ng-show="hasEnoughRecordsForSearch()"
-                    title="{{searchInitiated ? 'Close search box' : 'Open search box'}}">
-                    <i class="icon" ng-class="{'search-icon':!searchInitiated, 'back-icon':searchInitiated}"></i>
+                <div class="icon-area" ng-click="todo.toggleSearch()" ng-show="todo.hasEnoughRecordsForSearch()"
+                    title="{{todo.searchInitiated ? 'Close search box' : 'Open search box'}}">
+                    <i class="icon" ng-class="{'search-icon':!todo.searchInitiated, 'back-icon':todo.searchInitiated}"></i>
                 </div>
             </div>
             <!--Add operation-->
             <div class="icon-with-editor-area">
-                <div class="icon-area subsequent-item" ng-click="showAddOperationEditor()"
-                    title="{{addItemInitiated ? 'Close editor' : 'Add item'}}">
-                    <i class="icon" ng-class="{'add-icon':!addItemInitiated, 'back-icon':addItemInitiated}"></i>
+                <div class="icon-area subsequent-item" ng-click="todo.initiateItemAdding()"
+                    title="{{todo.addItemInitiated ? 'Close editor' : 'Add item'}}">
+                    <i class="icon" ng-class="{'add-icon':!todo.addItemInitiated, 'back-icon':todo.addItemInitiated}"></i>
                 </div>
-                <div class="editor-area subsequent-item" ng-show="addItemInitiated">
+                <div class="editor-area subsequent-item" ng-show="todo.addItemInitiated">
                     <form name="addItemForm">
-                        <input class="editor" name="todoItemEditor" ng-model="addEditorValue" type="text" maxlength="50"
+                        <input class="editor" name="todoItemEditor" ng-model="todo.itemName" type="text" maxlength="50"
                             required>
                     </form>
-                    <button ng-click="submitNewItem()" class="confirm-button"
+                    <button ng-click="todo.confirmItemAdding()" class="confirm-button"
                         title="{{addItemForm.todoItemEditor.$valid ? 'Submit' : 'Editor value is not valid'}}">
                         <i class="icon" ng-class="{'confirm-icon-active':addItemForm.todoItemEditor.$valid, 
                                 'confirm-icon-inactive': !addItemForm.todoItemEditor.$valid}"></i>
@@ -37,45 +38,45 @@
             </div>
             <!--Remove operation-->
             <div class="icon-with-editor-area">
-                <div class="icon-area subsequent-item" ng-click="showRemoveConfirmationPanel()"
-                    ng-show="hasSelectedLine()" title="{{removeItemInitiated ? 'Close editor' : 'Remove item'}}">
-                    <i class="icon" ng-class="{'remove-icon':!removeItemInitiated,
-                        'remove-icon-inactive':!removeItemInitiated && selectedItemIsDone(),
-                         'back-icon':removeItemInitiated}"></i>
+                <div class="icon-area subsequent-item" ng-click="todo.initiateItemRemoval()"
+                    ng-show="todo.hasSelectedItem()" title="{{todo.removeItemInitiated ? 'Close editor' : 'Remove item'}}">
+                    <i class="icon" ng-class="{'remove-icon':!todo.removeItemInitiated,
+                        'remove-icon-inactive':!todo.removeItemInitiated && todo.selectedItemIsDone(),
+                         'back-icon':todo.removeItemInitiated}"></i>
                 </div>
-                <div class="editor-area subsequent-item" ng-show="removeItemInitiated">
+                <div class="editor-area subsequent-item" ng-show="todo.removeItemInitiated">
                     <div class="remove-label-area">
                         <label class="confirm-label">Are you sure?</label>
                     </div>
-                    <button ng-click="confirmRemoval()" class="confirm-button" title="Submit"><i
+                    <button ng-click="todo.confirmItemRemoval()" class="confirm-button" title="Submit"><i
                             class="ok-icon icon"></i>
                     </button>
                 </div>
             </div>
             <!--Edit operation-->
             <div class="icon-with-editor-area">
-                <div class="icon-area subsequent-item" ng-click="showEditOperationEditor()" ng-show="hasSelectedLine()"
-                    title="{{editItemIntitated ? 'Close editor' : 'Edit item'}}">
-                    <i class="icon" ng-class="{'edit-icon':!editItemIntitated,
-                    'edit-icon-inactive':!editItemIntitated && selectedItemIsDone(),
-                    'back-icon':editItemIntitated}"></i>
+                <div class="icon-area subsequent-item" ng-click="todo.initiateItemEditing()" ng-show="todo.hasSelectedItem()"
+                    title="{{todo.editItemIntitated ? 'Close editor' : 'Edit item'}}">
+                    <i class="icon" ng-class="{'edit-icon':!todo.editItemIntitated,
+                    'edit-icon-inactive':!todo.editItemIntitated && todo.selectedItemIsDone(),
+                    'back-icon':todo.editItemIntitated}"></i>
                 </div>
-                <div class="editor-area subsequent-item" ng-show="editItemIntitated">
+                <div class="editor-area subsequent-item" ng-show="todo.editItemIntitated">
                     <form name="editItemForm">
-                        <input class="editor" name="todoItemEditor" ng-model="editEditorValue" type="text"
+                        <input class="editor" name="todoItemEditor" ng-model="todo.newName" type="text"
                             maxlength="50" required>
                     </form>
-                    <button ng-click="submitEditItem()" class="confirm-button"
-                        title="{{editItemForm.todoItemEditor.$valid && isModified()? 'Submit' : 'Editor value is not valid'}}">
-                        <i class="icon" ng-class="{'confirm-icon-active':editItemForm.todoItemEditor.$valid && isModified(), 
-                                'confirm-icon-inactive': !editItemForm.todoItemEditor.$valid || !isModified()}"></i>
+                    <button ng-click="todo.confirmItemEditing()" class="confirm-button"
+                        title="{{editItemForm.todoItemEditor.$valid && todo.isModified()? 'Submit' : 'Editor value is not valid'}}">
+                        <i class="icon" ng-class="{'confirm-icon-active':editItemForm.todoItemEditor.$valid && todo.isModified(), 
+                                'confirm-icon-inactive': !editItemForm.todoItemEditor.$valid || !todo.isModified()}"></i>
                     </button>
                 </div>
             </div>
             <!-- Done operation -->
-            <div class="icon-area subsequent-item" ng-show="hasSelectedLine()" ng-click="toggleDoneState()"
-                title="{{selectedItemIsDone() ? 'Revert item done state' : 'Mark item as done'}}">
-                <i class="icon" ng-class="{'done-icon':!selectedItemIsDone(), 'undo-icon':selectedItemIsDone()}"></i>
+            <div class="icon-area subsequent-item" ng-show="todo.hasSelectedItem()" ng-click="todo.toggleDoneState()"
+                title="{{todo.selectedItemIsDone() ? 'Revert item done state' : 'Mark item as done'}}">
+                <i class="icon" ng-class="{'done-icon':!todo.selectedItemIsDone(), 'undo-icon':todo.selectedItemIsDone()}"></i>
             </div>
         </div>
         <!-- Todo items-->
@@ -83,13 +84,13 @@
             <div class="paper-tablet">
                 <div class="paper-clip"><i class="clip"></i></div>
                 <div class="paper">
-                    <div class="search-line" ng-show="searchInitiated">
+                    <div class="search-line" ng-show="todo.searchInitiated">
                         <i class="search-input-icon icon"></i>
-                        <input class="editor" name="todoItemEditor" ng-model="searchEditorValue" type="text"
-                            ng-change="filterItems()">
+                        <input class="editor" name="todoItemEditor" ng-model="todo.searchEditorValue" type="text"
+                            ng-change="todo.filterItems()">
                     </div>
-                    <div class="line" ng-repeat="item in getItems()" ng-click="selectLine($index)"
-                        ng-class="{'line-selected':isSelected($index)}">
+                    <div class="line" ng-repeat="item in todo.getItems()" ng-click="todo.selectItem(item)"
+                        ng-class="{'line-selected':todo.isSelectedItem(item)}">
                         <label ng-class="{'line-through':item.done}">{{item.name}}</label>
                     </div>
                 </div>
@@ -98,182 +99,4 @@
     </div>
     </div>
 </body>
-<script>
-    var app = angular.module("ToDoApp", []);
-    app.controller('controller', function ($scope, $http, $log) {
-        $scope.appName = "Todo";
-        $scope.selectedLineIndex = null;
-        $scope.addItemInitiated = false;
-        $scope.editItemIntitated = false;
-        $scope.removeItemInitiated = false;
-        $scope.searchInitiated = false;
-        $scope.serverBaseUrl = "https://localhost:7053";
-        $scope.getItemsUrl = "/todoitems";
-        $scope.todoItems = [];
-        $scope.itemsToDisplay = $scope.todoItems;
-        $scope.uniqueTodoItemsNames = null;
-        $scope.confirmAddItemAvailable = false;
-        $scope.init = function () {
-            $scope.fetchTodoItems();
-        }
-        $scope.fetchTodoItems = function () {
-            $http.get($scope.serverBaseUrl + $scope.getItemsUrl).then(function (response) {
-                $scope.todoItems = response.data;
-                $log.info("The items fetched successfully. Size: " + response.data.length);
-            }, function (response) {
-                $log.error("The items couldn't be fetched because of service issue");
-            })
-        }
-        $scope.showAddOperationEditor = function () {
-            $scope.addItemInitiated = !$scope.addItemInitiated;
-            if ($scope.addItemInitiated) {
-                $scope.addEditorValue = "";
-            }
-        }
-        $scope.showEditOperationEditor = function () {
-            if ($scope.selectedItemIsDone()) {
-                return;
-            }
-            $scope.editItemIntitated = !$scope.editItemIntitated;
-            if ($scope.editItemIntitated) {
-                $scope.editEditorValue = $scope.todoItems[$scope.selectedLineIndex].name;
-            }
-        }
-        $scope.showRemoveConfirmationPanel = function () {
-            if (!$scope.selectedItemIsDone()) {
-                $scope.removeItemInitiated = !$scope.removeItemInitiated;
-            }
-        }
-        $scope.isUniqueName = function (name) {
-            let beforeAddSize = $scope.todoItems.size;
-            $scope.uniqueTodoItemsNames = new Set($scope.todoItems);
-            $scope.uniqueTodoItemsNames.add($scope.addEditorValue);
-            let afterAddSize = $scope.uniqueTodoItemsNames.size;
-            return afterAddSize != beforeAddSize;
-        }
-        $scope.submitNewItem = function () {
-            if (!$scope.addEditorValue) {
-                return;
-            }
-            $scope.addItemInitiated = false;
-            if ($scope.isUniqueName($scope.addEditorValue)) {
-                $http.post($scope.serverBaseUrl + $scope.getItemsUrl, JSON.stringify({
-                    name: $scope.addEditorValue,
-                    done: false
-                })).then(function (response) {
-                    $scope.todoItems.push(response.data);
-                    $log.info("The item '" + $scope.addEditorValue + "' added successfully");
-                }, function (response) {
-                    $log.error("The item '" + $scope.addEditorValue + "' couldn't be added because of service issue")
-                })
-            } else {
-                $log.warn("The item '" + $scope.addEditorValue + "' is already there in the list")
-            }
-        }
-        $scope.submitEditItem = function () {
-            if (!$scope.editEditorValue || !$scope.isModified()) {
-                return;
-            }
-            $scope.editItemIntitated = false;
-            if ($scope.isUniqueName($scope.editEditorValue)) {
-                $http.put($scope.serverBaseUrl + $scope.getItemsUrl + "/" + $scope.todoItems[$scope.selectedLineIndex].id, JSON.stringify({
-                    name: $scope.editEditorValue,
-                    done: $scope.todoItems[$scope.selectedLineIndex].done
-                })).then(function (response) {
-                    $log.info("The item '" + $scope.todoItems[$scope.selectedLineIndex].name + "' updated successfully. New name is '" + $scope.editEditorValue + "'");
-                    $scope.todoItems[$scope.selectedLineIndex].name = $scope.editEditorValue;
-                    $scope.editEditorValue = "";
-                }, function (response) {
-                    $log.error("The item '" + $scope.todoItems[$scope.selectedLineIndex].name + "' couldn't be updated because of service issue")
-                })
-            } else {
-                $log.warn("The item '" + $scope.editEditorValue + "' is already there in the list")
-            }
-        }
-        $scope.selectLine = function (lineIndex) {
-            if ($scope.hasValidSelectedLineIndex() && (lineIndex === $scope.selectedLineIndex)) {
-                $scope.selectedLineIndex = null;
-                return;
-            }
-            $scope.selectedLineIndex = lineIndex;
-        }
-        $scope.isSelected = function (lineIndex) {
-            return lineIndex === $scope.selectedLineIndex;
-        }
-        $scope.hasSelectedLine = function () {
-            return $scope.hasValidSelectedLineIndex();
-        }
-        $scope.isModified = function () {
-            return $scope.hasValidSelectedLineIndex() && $scope.todoItems[$scope.selectedLineIndex].name != $scope.editEditorValue;
-        }
-        $scope.confirmRemoval = function () {
-            if ($scope.hasValidSelectedLineIndex()) {
-                $http.delete($scope.serverBaseUrl + $scope.getItemsUrl + "/" + $scope.todoItems[$scope.selectedLineIndex].id).then(function (response) {
-                    $log.info("The item '" + $scope.todoItems[$scope.selectedLineIndex].name + "' removed successfully");
-                    $scope.todoItems.splice($scope.selectedLineIndex, 1);
-                    $scope.removeItemInitiated = false;
-                    $scope.selectedLineIndex = null;
-                }, function (response) {
-                    $log.error("The item '" + $scope.todoItems[$scope.selectedLineIndex].name + "' couldn't be deleted because of service issue")
-                })
-
-            }
-        }
-        $scope.toggleDoneState = function () {
-            if ($scope.hasValidSelectedLineIndex()) {
-                var doneState = !$scope.todoItems[$scope.selectedLineIndex].done;
-                $http.put($scope.serverBaseUrl + $scope.getItemsUrl + "/" + $scope.todoItems[$scope.selectedLineIndex].id, JSON.stringify({
-                    name: $scope.todoItems[$scope.selectedLineIndex].name,
-                    done: doneState
-                })).then(function (response) {
-                    $scope.todoItems[$scope.selectedLineIndex].done = doneState;
-                    if (doneState) {
-                        $log.info("The item '" + $scope.todoItems[$scope.selectedLineIndex].name + "' marked as completed successfully");
-                    } else {
-                        $log.info("The item '" + $scope.todoItems[$scope.selectedLineIndex].name + "' marked as NOT completed successfully");
-                    }
-                }, function (response) {
-                    $log.error("The item '" + $scope.todoItems[$scope.selectedLineIndex].name + "' couldn't be masked as completed because of service issue")
-                })
-            }
-        }
-        $scope.selectedItemIsDone = function () {
-            return $scope.hasValidSelectedLineIndex() ? $scope.todoItems[$scope.selectedLineIndex].done : false;
-        }
-
-        $scope.hasValidSelectedLineIndex = function () {
-            return $scope.hasValidIndex($scope.selectedLineIndex);
-        }
-
-        $scope.hasValidIndex = function (index) {
-            return index === 0 || index;
-        }
-        $scope.selectedLineNotDone = function () {
-            return $scope.hasSelectedLine() && !$scope.todoItems[$scope.selectedLineIndex].done;
-        }
-        $scope.toggleSearchBox = function () {
-            $scope.searchInitiated = !$scope.searchInitiated;
-            if (!$scope.searchInitiated) {
-                $scope.itemsToDisplay = $scope.todoItems;
-            } else {
-                $scope.searchEditorValue = "";
-                $scope.itemsToDisplay = $scope.todoItems;
-            }
-        }
-        $scope.filterItems = function () {
-            if ($scope.searchEditorValue) {
-                $scope.itemsToDisplay = $scope.todoItems.filter((item) => item.name.toLowerCase().includes($scope.searchEditorValue.toLowerCase()));
-            } else {
-                $scope.itemsToDisplay = $scope.todoItems;
-            }
-        }
-        $scope.hasEnoughRecordsForSearch = function () {
-            return $scope.todoItems && $scope.todoItems.length > 5;
-        }
-        $scope.getItems = function () {
-            return $scope.searchInitiated ? $scope.itemsToDisplay : $scope.todoItems;
-        }
-    })
-</script>
-
 </html>

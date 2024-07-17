@@ -34,7 +34,7 @@ body {
     display: inline-block;
     width: 100px;
     height: 100px;
-    background-image: url('icons/paper_clip.png');
+    background-image: url('../icons/paper_clip.png');
     background-repeat: no-repeat;
     background-size: 100% 100%;
     position: relative;
@@ -42,41 +42,41 @@ body {
 }
 
 .add-icon {
-    background-image: url('icons/add.png');
+    background-image: url('../icons/add.png');
 }
 
 .remove-icon {
-    background-image: url('icons/remove.png');
+    background-image: url('../icons/remove.png');
 }
 
 .edit-icon {
-    background-image: url('icons/edit.png');
+    background-image: url('../icons/edit.png');
 }
 
 .back-icon {
-    background-image: url('icons/back.png');
+    background-image: url('../icons/back.png');
 }
 
 .search-icon {
-    background-image: url('icons/search.png');
+    background-image: url('../icons/search.png');
 }
 
 .search-input-icon {
-    background-image: url('icons/search-input.png');
+    background-image: url('../icons/search-input.png');
 }
 
 .undo-icon {
-    background-image: url('icons/undo.png');
+    background-image: url('../icons/undo.png');
 }
 
 .ok-icon {
-    background-image: url('icons/ok.png');
+    background-image: url('../icons/ok.png');
     height: 40px !important;
     width: 40px !important;
 }
 
 .cancel-icon {
-    background-image: url('icons/cancel.png');
+    background-image: url('../icons/cancel.png');
 }
 
 .icon {
@@ -88,15 +88,15 @@ body {
 }
 
 .done-icon {
-    background-image: url('icons/done.png');
+    background-image: url('../icons/done.png');
 }
 
 .remove-icon-inactive {
-    background-image: url('icons/remove-inactive.png');
+    background-image: url('../icons/remove-inactive.png');
 }
 
 .edit-icon-inactive {
-    background-image: url('icons/edit-inactive.png');
+    background-image: url('../icons/edit-inactive.png');
 }
 
 .icon-panel {
@@ -130,11 +130,11 @@ body {
 }
 
 .confirm-icon-active {
-    background-image: url('icons/confirm_enabled.png');
+    background-image: url('../icons/confirm_enabled.png');
 }
 
 .confirm-icon-inactive {
-    background-image: url('icons/confirm_disabled.png');
+    background-image: url('../icons/confirm_disabled.png');
 }
 
 
