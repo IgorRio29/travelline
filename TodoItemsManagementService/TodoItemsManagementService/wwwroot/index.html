@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html ng-app="todoApp">
+
+<head>
+    <link rel="stylesheet" href="css/todo.css">
+    <title>Todo</title>
+    <script src="lib/angular.min.js"></script>
+    <script src="js/todoController.js"></script>
+    <script src="js/todoItemManagementService.js"></script>
+</head>
+
+<body>
+    <div class="container" ng-controller="todoController as todo" ng-init="todo.init()">
+        <div class="icon-panel">
+            <!-- Search-->
+            <div class="icon-with-editor-area">
+                <div class="icon-area" ng-click="todo.toggleSearch()" ng-show="todo.hasEnoughRecordsForSearch()"
+                    title="{{todo.searchInitiated ? 'Close search box' : 'Open search box'}}">
+                    <i class="icon"
+                        ng-class="{'search-icon':!todo.searchInitiated, 'back-icon':todo.searchInitiated}"></i>
+                </div>
+            </div>
+            <!--Add operation-->
+            <div class="icon-with-editor-area">
+                <div class="icon-area subsequent-item" ng-click="todo.initiateItemAdding()"
+                    title="{{todo.addItemInitiated ? 'Close editor' : 'Add item'}}">
+                    <i class="icon"
+                        ng-class="{'add-icon':!todo.addItemInitiated, 'back-icon':todo.addItemInitiated}"></i>
+                </div>
+                <div class="editor-area subsequent-item" ng-show="todo.addItemInitiated">
+                    <form name="addItemForm">
+                        <input class="editor" name="todoItemEditor" ng-model="todo.itemName" type="text" maxlength="50"
+                            required>
+                    </form>
+                    <button ng-click="todo.confirmItemAdding()" class="confirm-button"
+                        title="{{addItemForm.todoItemEditor.$valid ? 'Submit' : 'Editor value is not valid'}}">
+                        <i class="icon" ng-class="{'confirm-icon-active':addItemForm.todoItemEditor.$valid, 
+                                'confirm-icon-inactive': !addItemForm.todoItemEditor.$valid}"></i>
+                    </button>
+                </div>
+            </div>
+            <!--Remove operation-->
+            <div class="icon-with-editor-area">
+                <div class="icon-area subsequent-item" ng-click="todo.initiateItemRemoval()"
+                    ng-show="todo.hasSelectedItem()"
+                    title="{{todo.removeItemInitiated ? 'Close editor' : 'Remove item'}}">
+                    <i class="icon" ng-class="{'remove-icon':!todo.removeItemInitiated,
+                        'remove-icon-inactive':!todo.removeItemInitiated && todo.selectedItemIsDone(),
+                         'back-icon':todo.removeItemInitiated}"></i>
+                </div>
+                <div class="editor-area subsequent-item" ng-show="todo.removeItemInitiated">
+                    <div class="remove-label-area">
+                        <label class="confirm-label">Are you sure?</label>
+                    </div>
+                    <button ng-click="todo.confirmItemRemoval()" class="confirm-button" title="Submit"><i
+                            class="ok-icon icon"></i>
+                    </button>
+                </div>
+            </div>
+            <!--Edit operation-->
+            <div class="icon-with-editor-area">
+                <div class="icon-area subsequent-item" ng-click="todo.initiateItemEditing()"
+                    ng-show="todo.hasSelectedItem()" title="{{todo.editItemIntitated ? 'Close editor' : 'Edit item'}}">
+                    <i class="icon" ng-class="{'edit-icon':!todo.editItemIntitated,
+                    'edit-icon-inactive':!todo.editItemIntitated && todo.selectedItemIsDone(),
+                    'back-icon':todo.editItemIntitated}"></i>
+                </div>
+                <div class="editor-area subsequent-item" ng-show="todo.editItemIntitated">
+                    <form name="editItemForm">
+                        <input class="editor" name="todoItemEditor" ng-model="todo.newName" type="text" maxlength="50"
+                            required>
+                    </form>
+                    <button ng-click="todo.confirmItemEditing()" class="confirm-button"
+                        title="{{editItemForm.todoItemEditor.$valid && todo.isModified()? 'Submit' : 'Editor value is not valid'}}">
+                        <i class="icon"
+                            ng-class="{'confirm-icon-active':editItemForm.todoItemEditor.$valid && todo.isModified(), 
+                                'confirm-icon-inactive': !editItemForm.todoItemEditor.$valid || !todo.isModified()}"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Done operation -->
+            <div class="icon-area subsequent-item" ng-show="todo.hasSelectedItem()" ng-click="todo.toggleDoneState()"
+                title="{{todo.selectedItemIsDone() ? 'Revert item done state' : 'Mark item as done'}}">
+                <i class="icon"
+                    ng-class="{'done-icon':!todo.selectedItemIsDone(), 'undo-icon':todo.selectedItemIsDone()}"></i>
+            </div>
+        </div>
+        <!-- Todo items-->
+        <div class="tablet-panel">
+            <div class="paper-tablet">
+                <div class="paper-clip"><i class="clip"></i></div>
+                <div class="paper">
+                    <div class="search-line" ng-show="todo.searchInitiated">
+                        <i class="search-input-icon icon"></i>
+                        <input class="editor" name="todoItemEditor" ng-model="todo.searchEditorValue" type="text"
+                            ng-change="todo.filterItems()">
+                    </div>
+                    <div class="line" ng-repeat="item in todo.getItems()" ng-click="todo.selectItem(item)"
+                        ng-class="{'line-selected':todo.isSelectedItem(item)}">
+                        <label ng-class="{'line-through':item.done}">{{item.name}}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>

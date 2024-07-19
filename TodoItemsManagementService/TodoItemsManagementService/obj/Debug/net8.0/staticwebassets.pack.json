@@ -1,0 +1,101 @@
+{
+  "Files": [
+    {
+      "Id": "E:\\Dev\\Repos\\travelline\\TodoItemsManagementService\\TodoItemsManagementService\\wwwroot\\css\\todo.css",
+      "PackagePath": "staticwebassets\\css\\todo.css"
+    },
+    {
+      "Id": "E:\\Dev\\Repos\\travelline\\TodoItemsManagementService\\TodoItemsManagementService\\wwwroot\\icons\\add.png",
+      "PackagePath": "staticwebassets\\icons\\add.png"
+    },
+    {
+      "Id": "E:\\Dev\\Repos\\travelline\\TodoItemsManagementService\\TodoItemsManagementService\\wwwroot\\icons\\back.png",
+      "PackagePath": "staticwebassets\\icons\\back.png"
+    },
+    {
+      "Id": "E:\\Dev\\Repos\\travelline\\TodoItemsManagementService\\TodoItemsManagementService\\wwwroot\\icons\\cancel.png",
+      "PackagePath": "staticwebassets\\icons\\cancel.png"
+    },
+    {
+      "Id": "E:\\Dev\\Repos\\travelline\\TodoItemsManagementService\\TodoItemsManagementService\\wwwroot\\icons\\confirm_disabled.png",
+      "PackagePath": "staticwebassets\\icons\\confirm_disabled.png"
+    },
+    {
+      "Id": "E:\\Dev\\Repos\\travelline\\TodoItemsManagementService\\TodoItemsManagementService\\wwwroot\\icons\\confirm_enabled.png",
+      "PackagePath": "staticwebassets\\icons\\confirm_enabled.png"
+    },
+    {
+      "Id": "E:\\Dev\\Repos\\travelline\\TodoItemsManagementService\\TodoItemsManagementService\\wwwroot\\icons\\done.png",
+      "PackagePath": "staticwebassets\\icons\\done.png"
+    },
+    {
+      "Id": "E:\\Dev\\Repos\\travelline\\TodoItemsManagementService\\TodoItemsManagementService\\wwwroot\\icons\\edit-inactive.png",
+      "PackagePath": "staticwebassets\\icons\\edit-inactive.png"
+    },
+    {
+      "Id": "E:\\Dev\\Repos\\travelline\\TodoItemsManagementService\\TodoItemsManagementService\\wwwroot\\icons\\edit.png",
+      "PackagePath": "staticwebassets\\icons\\edit.png"
+    },
+    {
+      "Id": "E:\\Dev\\Repos\\travelline\\TodoItemsManagementService\\TodoItemsManagementService\\wwwroot\\icons\\ok.png",
+      "PackagePath": "staticwebassets\\icons\\ok.png"
+    },
+    {
+      "Id": "E:\\Dev\\Repos\\travelline\\TodoItemsManagementService\\TodoItemsManagementService\\wwwroot\\icons\\paper_clip.png",
+      "PackagePath": "staticwebassets\\icons\\paper_clip.png"
+    },
+    {
+      "Id": "E:\\Dev\\Repos\\travelline\\TodoItemsManagementService\\TodoItemsManagementService\\wwwroot\\icons\\remove-inactive.png",
+      "PackagePath": "staticwebassets\\icons\\remove-inactive.png"
+    },
+    {
+      "Id": "E:\\Dev\\Repos\\travelline\\TodoItemsManagementService\\TodoItemsManagementService\\wwwroot\\icons\\remove.png",
+      "PackagePath": "staticwebassets\\icons\\remove.png"
+    },
+    {
+      "Id": "E:\\Dev\\Repos\\travelline\\TodoItemsManagementService\\TodoItemsManagementService\\wwwroot\\icons\\search-input.png",
+      "PackagePath": "staticwebassets\\icons\\search-input.png"
+    },
+    {
+      "Id": "E:\\Dev\\Repos\\travelline\\TodoItemsManagementService\\TodoItemsManagementService\\wwwroot\\icons\\search.png",
+      "PackagePath": "staticwebassets\\icons\\search.png"
+    },
+    {
+      "Id": "E:\\Dev\\Repos\\travelline\\TodoItemsManagementService\\TodoItemsManagementService\\wwwroot\\icons\\undo.png",
+      "PackagePath": "staticwebassets\\icons\\undo.png"
+    },
+    {
+      "Id": "E:\\Dev\\Repos\\travelline\\TodoItemsManagementService\\TodoItemsManagementService\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "E:\\Dev\\Repos\\travelline\\TodoItemsManagementService\\TodoItemsManagementService\\wwwroot\\js\\todoController.js",
+      "PackagePath": "staticwebassets\\js\\todoController.js"
+    },
+    {
+      "Id": "E:\\Dev\\Repos\\travelline\\TodoItemsManagementService\\TodoItemsManagementService\\wwwroot\\js\\todoItemManagementService.js",
+      "PackagePath": "staticwebassets\\js\\todoItemManagementService.js"
+    },
+    {
+      "Id": "E:\\Dev\\Repos\\travelline\\TodoItemsManagementService\\TodoItemsManagementService\\wwwroot\\lib\\angular.min.js",
+      "PackagePath": "staticwebassets\\lib\\angular.min.js"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.TodoItemsManagementService.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.TodoItemsManagementService.props",
+      "PackagePath": "build\\TodoItemsManagementService.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.TodoItemsManagementService.props",
+      "PackagePath": "buildMultiTargeting\\TodoItemsManagementService.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.TodoItemsManagementService.props",
+      "PackagePath": "buildTransitive\\TodoItemsManagementService.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
