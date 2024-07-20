@@ -33,6 +33,7 @@ todoApp.factory('itemManagementService', function ($http, $q, $log) {
         updateItem: function (item, newName, doneState) {
             var deferred = $q.defer();
             $http.put(GET_ITEMS_FULL_URL + "/" + item.id, {
+                id: item.id,
                 name: newName,
                 done: doneState
             }).then(function success(response) {
